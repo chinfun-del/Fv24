@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Meta Pixel - Signup as Purchase 100 THB</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f4f5;
+      padding: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 24px 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      max-width: 420px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+
+    .info-box {
+      font-size: 0.85rem;
+      background: #f3f4ff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 20px;
+      color: #4b5563;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
+    }
+
+    button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.5);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 14px rgba(37, 99, 235, 0.45);
+    }
+
+    .small-text {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 10px;
+    }
+
+    .debug-title {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .debug-log {
+      margin-top: 6px;
+      background: #0b1120;
+      color: #e5e7eb;
+      font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.78rem;
+      padding: 10px;
+      border-radius: 10px;
+      max-height: 160px;
+      overflow-y: auto;
+      white-space: pre-line;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #4b5563;
+      margin-right: 6px;
+      margin-top: 4px;
+    }
+  </style>
+
+  <!-- ✅ Meta Pixel Base Code -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+      };
+      if(!f._fbq)f._fbq=n;
+      n.push=n;
+      n.loaded=!0;
+      n.version='2.0';
+      n.queue=[];
+      t=b.createElement(e);t.async=!0;
+      t.src=v;
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    // ⛳ TODO: เปลี่ยน Pixel ID ตรงนี้ให้เป็นของคุณ
+    fbq('init', '1164648652488740');
+    fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel -->
+</head>
+
+<body>
+  <div class="card">
+    <h1>ทดสอบ Pixel สมัครสมาชิก</h1>
+    <div class="subtitle">
+      ปุ่มเดียวเก็บ 3 Events: Signup_Click, CompleteRegistration, Purchase (100 THB)
+    </div>
+
+    <div class="info-box">
+      <strong>วิธีใช้:</strong>
+      1️⃣ เปลี่ยน Pixel ID ในโค้ดด้านบนให้เป็นของคุณเอง<br />
+      2️⃣ เปิด Events Manager &gt; Test Events<br />
+      3️⃣ คลิกปุ่มด้านล่าง แล้วดู Event แบบเรียลไทม์
+    </div>
+
+    <button id="signupBtn">สมัครสมาชิกตอนนี้</button>
+
+    <div class="small-text">
+      * สำหรับทดสอบเท่านั้น — ปรับ URL / parameters เพิ่มได้ตามจริง
+    </div>
+
+    <div class="debug-title">Debug Log (สำหรับดูในหน้านี้)</div>
+    <div id="debug-log" class="debug-log">
+      รอการคลิกปุ่มสมัครสมาชิก...
+    </div>
+
+    <div style="margin-top:10px;">
+      <span class="tag">#Signup_Click</span>
+      <span class="tag">#CompleteRegistration</span>
+      <span class="tag">#Purchase 100 THB</span>
+    </div>
+  </div>
+
+  <script>
+    // ฟังก์ชันเขียน log ลงกล่อง debug ด้านล่าง
+    function logMessage(message) {
+      var logBox = document.getElementById('debug-log');
+      var timestamp = new Date().toLocaleTimeString();
+      logBox.textContent += "\n[" + timestamp + "] " + message;
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    document.getElementById("signupBtn").addEventListener("click", function () {
+      // 1) Custom Event — ใช้สำหรับ Retarget และเช็ค click
+      fbq('trackCustom', 'Signup_Click', {
+        signup_source: 'main_signup_button',
+        page: window.location.href
+      });
+      logMessage("fbq('trackCustom', 'Signup_Click', {...}) fired");
+
+      // 2) Event การสมัครสมาชิกสำเร็จ
+      fbq('track', 'CompleteRegistration', {
+        registration_type: 'member_signup',
+        page: window.location.href
+      });
+      logMessage("fbq('track', 'CompleteRegistration', {...}) fired");
+
+      // 3) Event Purchase (ใช้ให้ Meta Optimize คุณภาพลูกค้าใหม่)
+      fbq('track', 'Purchase', {
+        value: 100.00,
+        currency: "THB",
+        signup_plan: 'default_100',
+        signup_source: 'button_on_landing'
+      });
+      logMessage("fbq('track', 'Purchase', { value: 100, currency: 'THB', ... }) fired");
+
+      // ถ้าต้องการ redirect ไปหน้า thank-you จริง ให้เปลี่ยน URL ด้านล่างนี้
+      // ตอนนี้เป็นแค่ anchor เดียวกันเพื่อให้เทสต์บน CodePen ได้ง่าย
+      setTimeout(function () {
+        alert("สมมติว่าสมัครสมาชิกสำเร็จแล้ว (ทดสอบ)");
+      }, 400);
+    });
+  </script>
+</body>
+</html>
