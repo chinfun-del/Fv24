@@ -42,7 +42,7 @@
       margin-bottom: 20px;
     }
 
-    button {
+    button, .line-btn {
       width: 100%;
       border: none;
       border-radius: 999px;
@@ -50,9 +50,17 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      background: #2563eb;
       color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
       transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s;
+      margin-top: 12px;
+    }
+
+    button {
+      background: #2563eb;
       box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
     }
 
@@ -62,13 +70,25 @@
       box-shadow: 0 10px 24px rgba(37, 99, 235, 0.5);
     }
 
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 5px 14px rgba(37, 99, 235, 0.45);
+    .line-btn {
+      background: #06c755;
+      box-shadow: 0 8px 18px rgba(6, 199, 85, 0.35);
+      text-decoration: none;
+    }
+
+    .line-btn:hover {
+      background: #05b34c;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(6, 199, 85, 0.45);
+    }
+
+    .line-logo {
+      width: 20px;
+      height: 20px;
     }
   </style>
 
-  <!-- ✅ Meta Pixel Base Code -->
+  <!-- Meta Pixel Base -->
   <script>
     !function(f,b,e,v,n,t,s){
       if(f.fbq)return;n=f.fbq=function(){
@@ -85,24 +105,29 @@
       s.parentNode.insertBefore(t,s)
     }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
 
-    // ⛳ เปลี่ยน Pixel ID ตรงนี้ให้เป็นของคุณ
     fbq('init', '1164648652488740');
     fbq('track', 'PageView');
   </script>
-  <!-- End Meta Pixel -->
 </head>
 
 <body>
   <div class="card">
     <h1>สมัครสมาชิก</h1>
-    <p>กดปุ่มด้านล่างเพื่อสมัครสมาชิกและเริ่มต้นใช้งาน</p>
+    <p>กดปุ่มด้านล่างเพื่อเริ่มต้นใช้งาน</p>
 
+    <!-- ปุ่มสมัครสมาชิก -->
     <button id="signupBtn">สมัครสมาชิก</button>
+
+    <!-- ปุ่ม LINE พร้อมโลโก้ -->
+    <a href="https://lin.ee/xxxxxxx" id="lineBtn" class="line-btn">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" class="line-logo" />
+      ติดต่อผ่าน LINE
+    </a>
   </div>
 
   <script>
+    // Event สมัครสมาชิก
     document.getElementById("signupBtn").addEventListener("click", function () {
-
       fbq('trackCustom', 'Signup_Click', {
         signup_source: 'main_signup_button',
         page: window.location.href
@@ -120,9 +145,17 @@
         signup_source: 'button_on_landing'
       });
 
-      // 👉 เปลี่ยน URL ด้านล่างไปยังหน้า Thank You / ระบบสมัครจริงของคุณ
       window.location.href = "https://your-redirect-url.com/thank-you";
     });
+
+    // Event ปุ่ม LINE
+    document.getElementById("lineBtn").addEventListener("click", function () {
+      fbq('trackCustom', 'Contact_LINE', {
+        contact_method: 'LINE',
+        page: window.location.href
+      });
+    });
   </script>
+
 </body>
 </html>
